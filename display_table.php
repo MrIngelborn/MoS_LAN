@@ -1,14 +1,14 @@
 <?php
 	require('is_logged_in.php');
 	if (isset($_GET['table'])):
-		require_once('database.class.php');
+		require_once('classes/database.class.php');
 		$pdo = Database::getConnection();
 		
 		$table = htmlspecialchars($_GET['table']);
 		$columns = isset($_GET['columns']) ? htmlspecialchars($_GET['columns']) : '*';
 		
 		$sql = "SELECT $columns FROM $table";
-		$stmt = Database::query($sql, null);
+		$stmt = Database::query($sql, array());
 		
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 		
@@ -30,9 +30,9 @@
 <html>
 	<head>
 		<title>MoS PLAN18 Table</title>
-		<link rel="stylesheet" href="spectre/spectre.min.css" />
-		<link rel="stylesheet" href="spectre/spectre-icons.min.css" />
-		<script src="jquery/jquery-3.3.1.min.js"></script>
+		<link rel="stylesheet" href="css/spectre/spectre.min.css" />
+		<link rel="stylesheet" href="css/spectre/spectre-icons.min.css" />
+		<script src="js/jquery/jquery-3.3.1.min.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$('.delete-btn').click(function(){

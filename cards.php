@@ -1,18 +1,18 @@
 <?php
 	require('is_logged_in.php');
-	require_once('database.class.php');
+	require_once('classes/database.class.php');
 	
 	$sql = 'SELECT * FROM `view_print_cards` ORDER BY `barcode` ASC';
-	$statement = Database::query($sql, null);
+	$statement = Database::query($sql);
 ?>
 
 <!DOCTYPE html>
 <html>
 	<head>
-		<link href="spectre/spectre.min.css" rel="stylesheet">
-		<link href="spectre/spectre-icons.min.css" rel="stylesheet">
-		<script src="jquery/jquery-3.3.1.min.js" lang="javascript" type="text/javascript"></script>
-		<script src="jquery/jquery.textfill.min.js" lang="javascript" type="text/javascript"></script>
+		<link href="/css/spectre/spectre.min.css" rel="stylesheet">
+		<link href="/css/spectre/spectre-icons.min.css" rel="stylesheet">
+		<script src="/js/jquery/jquery-3.3.1.min.js" lang="javascript" type="text/javascript"></script>
+		<script src="/js/jquery/jquery.textfill.min.js" lang="javascript" type="text/javascript"></script>
 		<script>
 			$(document).ready(function(){
 				console.log("hej");

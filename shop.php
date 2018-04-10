@@ -18,7 +18,7 @@ session_start();
 if(!isset($_SESSION['cart'])) $_SESSION['cart'] = array();
 
 // Get databade connection
-require_once('database.class.php');
+require_once('classes/database.class.php');
 $pdo = Database::getConnection();
 
 $products = array();
@@ -99,7 +99,7 @@ if(isset($_POST['code'])) {
 <html>
 	<head>
 		<title>MoS PLAN18 Shop</title>
-		<link rel="stylesheet" href="spectre/spectre.min.css" />
+		<link rel="stylesheet" href="css/spectre/spectre.min.css" />
 		<style>
 			tr:nth-last-child(2) td {
 				border-bottom-color: #d3d7de;

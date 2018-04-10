@@ -3,7 +3,7 @@
 if (isset($_POST['table'])) {
 	$table = htmlspecialchars($_POST['table']);
 	
-	require_once('../database.class.php');
+	require_once('../classes/database.class.php');
 	$pdo = Database::getConnection();
 	
 	$sql = "SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_NAME = '$table'";

@@ -12,7 +12,7 @@ $errorMsg;
 
 if (isset($_POST['barcode'])) {
 	// Get databade connection
-	require_once('database.class.php');
+	require_once('classes/database.class.php');
 	$pdo = Database::getConnection();
 	// Save variable
 	$barcode = $_POST['barcode'];
@@ -75,7 +75,7 @@ if (isset($_POST['barcode'])) {
 	<head>
 		<title>MoS - Incheckning</title>
 	</head>
-	<script src="jquery/jquery-3.3.1.min.js"></script>
+	<script src="js/jquery/jquery-3.3.1.min.js"></script>
 	<script>
 		$(document).ready(function(){
 			$("#overlay").fadeOut(5000, "swing", function(){});

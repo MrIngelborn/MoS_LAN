@@ -29,7 +29,7 @@ if (isset($_POST['amount']) && isset($_POST['barcode'])) {
 <html>
 	<head>
 		<title>MoS PLAN18 Pay Debts</title>
-		<link rel="stylesheet" href="spectre/spectre.min.css" />
+		<link rel="stylesheet" href="css/spectre/spectre.min.css" />
 	</head>
 	<body>
 		<form action="" method="post" >
