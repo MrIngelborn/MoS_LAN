@@ -1,15 +1,8 @@
 <?php
-require_once('../classes/database.class.php');
+require_once('../classes/user.class.php');
 
 if(isset($_POST['username']) && isset($_POST['password'])) {
-	$login_table = 'login';
-	$values = array(
-			':username' => strtolower($_POST['username']),
-			':password' => md5($_POST['password']),
-			':admin' => isset($_POST['admin'])
-		);		
-	$sql = "INSERT INTO $login_table (username, password, admin) VALUES (:username, :password, :admin)";
-	$stmt = Database::query($sql, $values);
+	$success = User::Register($_POST['username'], $_POST['password'], isset($_POST['admin']));
 	
 	if($stmt->rowCount()) { //insert success
 		echo "Successfully added user {$_POST['username']}";
@@ -18,7 +11,6 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 		echo "Could not add user {$_POST['username']}";
 	}
 }
-	
 ?>
 <h1>Add user</h1>
 <form action="" method="post">
