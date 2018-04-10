@@ -5,9 +5,10 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 	$login_table = 'login';
 	$values = array(
 			':username' => strtolower($_POST['username']),
-			':password' => md5($_POST['password'])
+			':password' => md5($_POST['password']),
+			':admin' => isset($_POST['admin'])
 		);		
-	$sql = "INSERT INTO $login_table (username, password) VALUES (:username, :password)";
+	$sql = "INSERT INTO $login_table (username, password, admin) VALUES (:username, :password, :admin)";
 	$res = $pdo = Database::query($sql, $values);
 	
 	echo "User added: {$_POST['username']}";
@@ -21,5 +22,9 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 	<br/>
 	<label for="username">Password</label>
 	<input name="password" type="password">
+	<br/>
+	<label for="admin">Admin</label>
+	<input name="admin" type="checkbox">
+	<br/>
 	<input type="submit">
 </form>
