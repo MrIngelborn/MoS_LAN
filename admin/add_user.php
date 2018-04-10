@@ -9,9 +9,14 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 			':admin' => isset($_POST['admin'])
 		);		
 	$sql = "INSERT INTO $login_table (username, password, admin) VALUES (:username, :password, :admin)";
-	$res = $pdo = Database::query($sql, $values);
+	$stmt = Database::query($sql, $values);
 	
-	echo "User added: {$_POST['username']}";
+	if($stmt->rowCount()) { //insert success
+		echo "Successfully added user {$_POST['username']}";
+	}
+	else {
+		echo "Could not add user {$_POST['username']}";
+	}
 }
 	
 ?>
