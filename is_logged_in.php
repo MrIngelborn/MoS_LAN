@@ -7,6 +7,8 @@ function is_logged_in() {
 		unset($_SESSION['login_time']);
 		return false;
 	}
+	// Update login time
+	$_SESSION['login_time'] = time();
 	return true;
 }
 
