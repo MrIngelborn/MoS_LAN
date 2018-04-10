@@ -3,7 +3,7 @@
         const USERNAME="root";
         const PASSWORD="root";
         const HOST="localhost";
-        const DB="plan18";
+        const DB="plan19";
 
         static function getConnection() {
             $username = self::USERNAME;
@@ -20,14 +20,9 @@
             $connection = new PDO("mysql:host=$host", $username, $password);
             return $connection;
         }
-        static function query($sql, array $params=array(), $args=null) {
+        static function query($sql, $args = null) {
             $connection = Self::getConnection();
             $stmt = $connection->prepare($sql);
-            
-            foreach ($params as $key => $value) {
-	            $stmt->bindParam(':'.$key, $value);
-            }
-            
             $stmt->execute($args);
             return $stmt;
         }
