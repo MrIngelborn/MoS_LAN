@@ -2,13 +2,13 @@
 require_once('database.class.php');
 
 class User {
-	private static string $login_table = 'login';
-	private static string $user_table = 'user_info';
-	private int $id;
-	boolean $admin;
-	string $name;
+	private const LOGIN_TABLE = 'login';
+	private const USER_TABLE = 'user_info';
+	var $id;
+	var $admin;
+	var $name;
 	
-	private function __construct(int $id, string $name, boolean $admin) {
+	private function __construct($id, $name, $admin) {
 		$this->id = $id;
 		$this->name = $name;
 		$this->admin = $admin;
@@ -22,8 +22,7 @@ class User {
 		Returns: Logged in user or false if unsuccessfull
 	**/
 	static function Login(string $username, string $password) {
-		$table = Self::login_table;
-		
+		$table = Self::LOGIN_TABLE;
 		$values = array(
 				':username' => strtolower($username),
 				':password' => md5($password)
@@ -34,21 +33,28 @@ class User {
 		
 		if ($stmt->rowCount()) { // Login successful
 			$row = $stmt->fetch(PDO::FETCH_ASSOC);
-			$admin = $row['admin'];
 			
+			// Set user vaiables
+			$admin = $row['admin'];
 			$id = $row['user_id'];
-			$table = Self::user_table;
+			$name = $username;
+			$user = new User($id, $name, $admin);
+			
+			// Try to get some more user info, if available
+			$table = Self::USER_TABLE;
 			$sql = "SELECT name FROM $table WHERE user_id = :id";
 			$values = array(
 				':id' => strtolower($id)
 			);
 			$stmt = Database::query($sql, $values);
-			if ($stmt->rowCount()) { // User info exists
-				$user = new User($id, $name, $admin);
-				return $user;
+			// If user info exists
+			if ($stmt->rowCount()) {
+				$row = $stmt->fetch(PDO::FETCH_ASSOC);
+				$user->name = $row['name'];
 			}
-		}
-		return false; // Login unsuccessfull
+			return $user;
+		} 
+		return false; // Login unsuccessful
 	}
 	
 	static function Register(string $username, string $password, bool $admin) {
