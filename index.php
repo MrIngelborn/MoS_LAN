@@ -1,5 +1,5 @@
 <?php
-namespace MoS\LAN;
+use MoS\LAN\Autoloader;
 
 // Enable error reporting for testing
 ini_set('error_reporting', E_ALL);
