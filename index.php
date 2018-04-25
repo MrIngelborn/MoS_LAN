@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . "/classes/Autoloader.php";;
+
+die();
+	
 // Always update activity
 require('functions/update_activity.php');
 
