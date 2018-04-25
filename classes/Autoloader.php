@@ -1,9 +1,14 @@
 <?php
 namespace MoS\LAN;
 
-class Autoload
+class Autoloader
 {
-	function regsiter()
+	public function register()
+	{
+		spl_autoload_register(array($this, 'loadClass'));
+	}
+	
+	private function loadClass($class)
 	{
 	    // project-specific namespace prefix
 	    $prefix = 'MoS\\LAN\\';
