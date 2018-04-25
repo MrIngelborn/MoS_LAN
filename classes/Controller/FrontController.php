@@ -30,12 +30,12 @@ class FrontController implements FrontControllerInterface
     
     protected function parseUri() {
         $path = trim(parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH), "/");
-        $path = preg_replace('/[^a-zA-Z0-9]/', "", $path);
+        $path = preg_replace('/[^a-zA-Z0-9]\//', "", $path);
         if (strpos($path, $this->basePath) === 0) {
             $path = substr($path, strlen($this->basePath));
         }
         @list($controller, $action, $params) = explode("/", $path, 3);
-        if (isset($controller)) {
+        if (isset($controller) && strlen($controller) > 0) {
             $this->setController($controller);
         }
         if (isset($action)) {
