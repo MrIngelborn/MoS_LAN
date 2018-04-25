@@ -14,7 +14,7 @@ class Autoloader
 	    $prefix = 'MoS\\LAN\\';
 	
 	    // base directory for the namespace prefix
-	    $base_dir = __DIR__ . '/classes/';
+	    $base_dir = __DIR__.'/';
 	
 	    // does the class use the namespace prefix?
 	    $len = strlen($prefix);
