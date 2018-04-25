@@ -3,13 +3,14 @@ namespace MoS\LAN\Controller;
 
 class FrontController implements FrontControllerInterface
 {
-    const DEFAULT_CONTROLLER = "IndexController";
-    const DEFAULT_ACTION     = "index";
+    const DEFAULT_CONTROLLER   = 'IndexController';
+    const DEFAULT_ACTION       = 'index';
+    const CONTROLLER_NAMESPACE = 'MoS\\LAN\\Controller\\Controllers';
     
     protected $controller    = self::DEFAULT_CONTROLLER;
     protected $action        = self::DEFAULT_ACTION;
     protected $params        = array();
-    protected $basePath      = "controllers/";
+    protected $basePath      = "/";
     
     public function __construct(array $options = array()) {
         if (empty($options)) {
@@ -57,7 +58,7 @@ class FrontController implements FrontControllerInterface
     }
     
     public function setAction($action) {
-        $reflector = new ReflectionClass($this->controller);
+        $reflector = new \ReflectionClass($this->controller);
         if (!$reflector->hasMethod($action)) {
             throw new \InvalidArgumentException(
                 "The controller action '$action' has been not defined.");
@@ -72,6 +73,8 @@ class FrontController implements FrontControllerInterface
     }
     
     public function run() {
-        call_user_func_array(array(new $this->controller, $this->action), $this->params);
+	    $namespace = self::CONTROLLER_NAMESPACE;
+	    eval("\$controller = new $namespace\\{$this->controller};");
+        call_user_func_array(array($controller, $this->action), $this->params);
     }
 }

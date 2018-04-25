@@ -12,7 +12,7 @@ $autoloader = new Autoloader();
 $autoloader->register();
 
 $frontController = new FrontController();
-$frontcontroller->run();
+$frontController->run();
 
 die();
 	

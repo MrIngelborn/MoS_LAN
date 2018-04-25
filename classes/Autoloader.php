@@ -34,7 +34,9 @@ class Autoloader
 	    // if the file exists, require it
 	    if (file_exists($file)) {
 	        require $file;
+	        //echo "Found file: '$file'", '<br/>', PHP_EOL;
 	    }
+	    //else echo "Could not find file: '$file'", '<br/>', PHP_EOL;
 	}
 }
 	
