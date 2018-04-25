@@ -1,5 +1,6 @@
 <?php
-use MoS\LAN\Autoloader;
+use MoS\LAN\Autoloader,
+	MoS\LAN\Controller\FrontController;
 
 // Enable error reporting for testing
 ini_set('error_reporting', E_ALL);
@@ -9,6 +10,9 @@ ini_set('display_errors', 'true');
 require_once __DIR__."/classes/Autoloader.php";
 $autoloader = new Autoloader();
 $autoloader->register();
+
+$frontController = new FrontController();
+$frontcontroller->run();
 
 die();
 	
