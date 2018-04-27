@@ -5,7 +5,7 @@ class FrontController implements FrontControllerInterface
 {
     const CONTROLLER_NAMESPACE = 'MoS\\LAN\\Controller\\Controllers\\';
     const DEFAULT_CONTROLLER   = 'IndexController';
-    const DEFAULT_ACTION       = 'index';
+    const DEFAULT_ACTION       = 'display';
     
     protected $controller    = self::CONTROLLER_NAMESPACE . self::DEFAULT_CONTROLLER;
     protected $action        = self::DEFAULT_ACTION;
