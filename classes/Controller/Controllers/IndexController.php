@@ -1,9 +1,13 @@
 <?php
 namespace MoS\LAN\Controller\Controllers;
 
-class IndexController
+class IndexController extends AbstractController
 {
-	public function index(){
-		echo 'INDEX';
+	/**
+	* @return The mail content of the page
+	*/
+	protected function the_content() {
+		return 'INDEX';
 	}
+
 }
