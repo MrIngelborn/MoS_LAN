@@ -1,7 +1,7 @@
 <?php
 namespace MoS\LAN\Controller\Controllers;
 
-abstract class AbstractController impements ControllerInterface
+abstract class AbstractController implements ControllerInterface
 {
 	protected $title = "MoS LAN";
 	protected $delimiter = "\t";
