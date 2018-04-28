@@ -23,8 +23,8 @@ abstract class AbstractController implements ControllerInterface
 		$this->the_header();
 		echo '</head>', PHP_EOL;
 		echo '<body>', PHP_EOL;
-		echo $this->the_content(), PHP_EOL;
-		echo $this->the_footer(), PHP_EOL;
+		$this->the_content();
+		$this->the_footer();
 		echo '</body>', PHP_EOL;
 		echo '</html>';
 	}
@@ -50,14 +50,14 @@ abstract class AbstractController implements ControllerInterface
 	}
 	
 	/**
-	* @return The data that should be displayed on the bottom of the page
+	* Prints the data that should be displayed on the bottom of the page
 	*/
 	protected function the_footer() {
 		
 	}
 	
 	/**
-	* @return The mail content of the page
+	* Prints the main content of the page
 	*/
 	protected abstract function the_content();
 }
