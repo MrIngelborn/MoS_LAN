@@ -11,10 +11,13 @@ require_once __DIR__."/classes/Autoloader.php";
 $autoloader = new Autoloader();
 $autoloader->register();
 
+// Init Front Controller
 $frontController = new FrontController();
 $frontController->run();
 
 die();
+
+// ---- Old stuff ----
 	
 // Always update activity
 require('functions/update_activity.php');
