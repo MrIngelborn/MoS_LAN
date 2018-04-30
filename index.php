@@ -11,6 +11,9 @@ require_once __DIR__."/classes/Autoloader.php";
 $autoloader = new Autoloader();
 $autoloader->register();
 
+// include routes configuration
+include 'config/routes.php';
+
 // Init Front Controller
 $frontController = new FrontController();
 $frontController->run();
