@@ -14,6 +14,10 @@ $autoloader->register();
 // include routes configuration
 include 'config/routes.php';
 
+echo $_SERVER['REQUEST_URI'];
+
+die();
+
 // Init Front Controller
 $frontController = new FrontController();
 $frontController->run();
