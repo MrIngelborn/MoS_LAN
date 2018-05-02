@@ -1,7 +1,12 @@
 <?php
 namespace MoS\LAN\Routing;
 
-class Route implements RouteInterface {
+class Route implements RouteInterface
+{
+	private const CONTROLLER_CLASS_NAMESPACE = "\\MoS\\LAN\\Controller\\Controllers\\";
+	
+	private $path;
+	private $controllerClass;
 	
 	public function __construct($path, $controllerClass) 
 	{
@@ -11,12 +16,14 @@ class Route implements RouteInterface {
 	
 	public function match(RequestInterface $request) 
 	{
-		return $this->path === $request->getUri();
+		$request_path_start = substr($request->getPath(), 0, sizeof($this->path));
+		return $this->path === $request_path_start;
 	}
 	
 	public function createController() 
 	{
-		return new $this->controllerClass;
+		$class = self::CONTROLLER_CLASS_NAMESPACE . $this->controllerClass;
+		return new $class;
 	}
 }
 ?>
