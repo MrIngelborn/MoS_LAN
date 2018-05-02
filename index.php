@@ -12,8 +12,10 @@ ini_set('display_errors', 'true');
 
 // Enable Autoloader
 require_once __DIR__."/vendor/Psr4AutoloaderClass.php";
-$autoloader = new Autoloader;
+$autoloader = new Psr4AutoloaderClass;
 $autoloader->register();
+$autoloader->addNamespace('MoS\LAN', __DIR__.'/vendor/MoS-LAN/src');
+$autoloader->addNamespace('MrIngelborn\Router', __DIR__.'/vendor/MrIngelborn/Router/src');
 
 // include routes configuration
 //include 'config/routes.php';
