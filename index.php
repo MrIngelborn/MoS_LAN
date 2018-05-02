@@ -1,6 +1,11 @@
 <?php
 use MoS\LAN\Autoloader,
-	MoS\LAN\Controller\FrontController;
+	MoS\LAN\Controller\FrontController,
+	MoS\LAN\Routing\Request,
+	MoS\LAN\Routing\Response,
+	MoS\LAN\Routing\Route,
+	MoS\LAN\Routing\Router,
+	MoS\LAN\Routing\Dispatcher;
 
 // Enable error reporting for testing
 ini_set('error_reporting', E_ALL);
@@ -14,7 +19,22 @@ $autoloader->register();
 // include routes configuration
 include 'config/routes.php';
 
-echo $_SERVER['REQUEST_URI'];
+$request = new Request($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
+
+$response = new Response('HTTP/1.0');
+
+$routes = array();
+$routes[] = new Route('/', "PageController");
+$routes[] = new Route('error', 'ErrorController');
+$routes[] = new Route('/test/', 'PageController');
+ 
+$router = new Router($routes);
+ 
+$dispatcher = new Dispatcher;
+ 
+$frontController = new FrontController($router, $dispatcher);
+ 
+$frontController->run($request, $response);
 
 die();
 
