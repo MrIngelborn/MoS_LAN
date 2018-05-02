@@ -2,6 +2,9 @@
 namespace MoS\LAN\Routing;
 
 class Response implements ResponseInterface {
+	private $version;
+	private $headers;
+	
 	public function __construct($version)
 	{
 		$this->version = $version;
