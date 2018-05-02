@@ -1,7 +1,8 @@
 <?php
 namespace MoS\LAN\Routing;
 
-class Response implements ResponseInterface {
+class Response implements ResponseInterface
+{
 	private $version;
 	private $headers;
 	
