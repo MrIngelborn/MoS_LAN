@@ -1,11 +1,13 @@
 <?php
-namespace MoS\LAN\Controller\Controllers; 
+namespace MoS\LAN\Controller\Controllers;
+
+use MoS\LAN\Routing\RequestInterface,
+	MoS\LAN\Routing\ResponseInterface;
 
 interface ControllerInterface
 {
 	/**
-	* Display the page with the given aguments
-	* @param args array of arguments to the controller
+	* Execute the given request
 	*/
-	public function display(array $args = array());
+	public function execute(RequestInterface $request, ResponseInterface $response);
 }
