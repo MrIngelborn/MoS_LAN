@@ -2,6 +2,8 @@
 namespace MoS\LAN\Routing;
 
 class Router implements RouterInterface {
+	private $routes;
+	
 	public function __construct($routes) 
 	{
 		$this->addRoutes($routes);
@@ -26,15 +28,20 @@ class Router implements RouterInterface {
 		return $this->routes;
 	}
 	
-	public function route(RequestInterface $request, ResponseInterface $response) 
+	/**
+	* Find the route for the given request
+	* @return The route or false if no route was found
+	*/
+	public function route(RequestInterface $request): ?RouteInterface
 	{
 		foreach ($this->routes as $route) {
 			if ($route->match($request)) {
 				return $route;
 			}
 		}
-		$response->addHeader("404 Page Not Found")->send();
-		throw new \OutOfRangeException("No route matched the given URI.");
+		
+		//throw new \OutOfRangeException("No route matched the given URI.");
+		return null;
 	}
 }
 ?>
