@@ -1,6 +1,5 @@
 <?php
-use MoS\LAN\Autoloader,
-	MoS\LAN\Controller\FrontController,
+use MoS\LAN\Controller\FrontController,
 	MoS\LAN\Routing\Request,
 	MoS\LAN\Routing\Response,
 	MoS\LAN\Routing\Route,
@@ -12,12 +11,12 @@ ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 'true');
 
 // Enable Autoloader
-require_once __DIR__."/classes/Autoloader.php";
-$autoloader = new Autoloader();
+require_once __DIR__."/vendor/Psr4AutoloaderClass.php";
+$autoloader = new Autoloader;
 $autoloader->register();
 
 // include routes configuration
-include 'config/routes.php';
+//include 'config/routes.php';
 
 $request = new Request($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
 
