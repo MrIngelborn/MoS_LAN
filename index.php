@@ -1,5 +1,6 @@
 <?php
 use MoS\LAN\Controller\FrontController,
+	MoS\Router\Config,
 	MoS\LAN\Routing\Request,
 	MoS\LAN\Routing\Response,
 	MoS\LAN\Routing\Route,
@@ -15,7 +16,31 @@ require_once __DIR__."/vendor/Psr4AutoloaderClass.php";
 $autoloader = new Psr4AutoloaderClass;
 $autoloader->register();
 $autoloader->addNamespace('MoS\LAN', __DIR__.'/vendor/MoS-LAN/src');
-$autoloader->addNamespace('MrIngelborn\Router', __DIR__.'/vendor/MrIngelborn/Router/src');
+$autoloader->addNamespace('PHPRouter', __DIR__.'/vendor/PHPRouter/src');
+$autoloader->addNamespace('Symfony\Component\Yaml', __DIR__.'/vendor/Symfony-Yaml');
+
+// Load router configuration
+$config = Config::fromYAMLFile(__DIR__.'/config/routes.yaml');
+
+print_r($config);
+
+
+
+
+
+
+die();
+
+
+
+
+
+
+
+
+
+
+// ---- Old stuff -----
 
 // include routes configuration
 //include 'config/routes.php';

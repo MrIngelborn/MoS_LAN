@@ -1,0 +1,9 @@
+base_path: /index
+
+routes:
+  index: [/index, PageController.index, GET]
+  display_user: [/user_info, PageController.user, GET]
+  get_user: [/user, UserController.get, GET]
+  create_user: [/user, UserController.create, POST]
+  delete_user: [/user, UserController.delete, DELETE]
+  update_user: [/user, UserController.update, PUT]
