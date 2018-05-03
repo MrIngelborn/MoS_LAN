@@ -6,6 +6,7 @@ use MoS\LAN\Routing\RequestInterface,
 
 class PageController
 {
+	const VIEW_NAMESPCE = 'MoS\LAN\Views\\';
 	public function __construct()
 	{	
 	}
@@ -15,8 +16,9 @@ class PageController
 	*/
 	private function display($page, $params)
 	{
-		echo $page, '<br/>', PHP_EOL;
-		var_dump($params);
+		$class = self::VIEW_NAMESPCE . ucfirst(strtolower($page)) . 'View';
+		$instance = new $class;
+        call_user_func_array(array($instance, 'view'), $params);
 	}
 	
 	/**
