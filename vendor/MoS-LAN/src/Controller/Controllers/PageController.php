@@ -4,18 +4,26 @@ namespace MoS\LAN\Controller\Controllers;
 use MoS\LAN\Routing\RequestInterface,
 	MoS\LAN\Routing\ResponseInterface;
 
-class PageController implements ControllerInterface
+class PageController
 {
 	public function __construct()
+	{	
+	}
+	
+	/*
+	* Display page with name and parameters
+	*/
+	private function display($page, $params)
 	{
-		
+		echo $page, '<br/>', PHP_EOL;
+		var_dump($params);
 	}
 	
 	/**
-	* Execute the given request
+	* Catch all actions not declared
 	*/
-	public function execute(RequestInterface $request, ResponseInterface $response){
-		echo 'INDEX';
-	}
+	public function __call($method_name, $args) {
+        $this->display($method_name, $args);
+    }
 
 }
