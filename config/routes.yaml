@@ -1,9 +1,9 @@
-base_path: /index
+base_path: /
 
 routes:
-  index: [/index, PageController.index, GET]
-  display_user: [/user_info, PageController.user, GET]
-  get_user: [/user, UserController.get, GET]
-  create_user: [/user, UserController.create, POST]
-  delete_user: [/user, UserController.delete, DELETE]
-  update_user: [/user, UserController.update, PUT]
+  index: [/, MoS\LAN\Controller\Controllers\PageController.index, GET]
+  display_user: [/user, MoS\LAN\Controller\Controllers\PageController.user, GET]
+  get_user: [/users, MoS\LAN\Controller\Controllers\UserController.get, GET]
+  create_user: [/users, MoS\LAN\Controller\Controllers\UserController.create, POST]
+  delete_user: [/users, MoS\LAN\Controller\Controllers\UserController.delete, DELETE]
+  update_user: [/users, MoS\LAN\Controller\Controllers\UserController.update, PUT]
