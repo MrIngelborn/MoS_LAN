@@ -1,5 +1,5 @@
 <?php
-namespace MoS\LAN\Controller\Controllers;
+namespace MoS\LAN\Controller;
 
 use MoS\LAN\Routing\RequestInterface,
 	MoS\LAN\Routing\ResponseInterface;
