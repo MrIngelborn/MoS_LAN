@@ -85,7 +85,7 @@ class Router
         if (($pos = strpos($requestUrl, '?')) !== false) {
             $requestUrl = substr($requestUrl, 0, $pos);
         }
-
+		
         return $this->match($requestUrl, $requestMethod);
     }
 
@@ -141,7 +141,7 @@ class Router
 
             $routes->setParameters($params);
             $routes->dispatch();
-
+            
             return $routes;
         }
 
