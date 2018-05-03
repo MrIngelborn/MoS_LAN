@@ -1,11 +1,9 @@
 <?php
-use MoS\LAN\Controller\FrontController,
-	MoS\Router\Config,
-	MoS\LAN\Routing\Request,
-	MoS\LAN\Routing\Response,
-	MoS\LAN\Routing\Route,
-	MoS\LAN\Routing\Router,
-	MoS\LAN\Routing\Dispatcher;
+use MoS\LAN\Controller\FrontController;
+use PHPRouter\RouteCollection;
+use PHPRouter\Config;
+use PHPRouter\Router;
+use PHPRouter\Route;
 
 // Enable error reporting for testing
 ini_set('error_reporting', E_ALL);
@@ -17,12 +15,14 @@ $autoloader = new Psr4AutoloaderClass;
 $autoloader->register();
 $autoloader->addNamespace('MoS\LAN', __DIR__.'/vendor/MoS-LAN/src');
 $autoloader->addNamespace('PHPRouter', __DIR__.'/vendor/PHPRouter/src');
-$autoloader->addNamespace('Symfony\Component\Yaml', __DIR__.'/vendor/Symfony-Yaml');
+$autoloader->addNamespace('Symfony\Component\Yaml', __DIR__.'/vendor/Symfony-YAML');
 
 // Load router configuration
-$config = Config::fromYAMLFile(__DIR__.'/config/routes.yaml');
+$config = Config::loadFromFile(__DIR__.'/config/routes.yaml');
+$router = Router::parseConfig($config);
+$router->matchCurrentRequest();
 
-print_r($config);
+//print_r($config);
 
 
 
