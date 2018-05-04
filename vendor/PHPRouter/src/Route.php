@@ -149,6 +149,8 @@ class Route
 
     private function substituteFilter($matches)
     {
+	    var_dump($matches);
+	    echo '<br/>', PHP_EOL;
         if (isset($matches[1], $this->filters[$matches[1]])) {
             return $this->filters[$matches[1]];
         }
@@ -161,16 +163,18 @@ class Route
         return $this->parameters;
     }
 
-    public function setParameters(array $parameters)
+    public function setParameters(array $parameters, $parametersByName = false)
     {
         $this->parameters = $parameters;
+        $this->parametersByName = $parametersByName;
     }
 
     public function dispatch()
     {
         $action = explode('::', $this->config['_controller']);
         $instance = new $action[0];
-
+		
+		var_dump($this->parameters);
         if ($this->parametersByName) {
             $this->parameters = array($this->parameters);
         }
@@ -180,7 +184,6 @@ class Route
 
             return ;
         }
-
         call_user_func_array(array($instance, $action[1]), $this->parameters);
     }
 

@@ -126,7 +126,6 @@ class Router
                 $argument_keys = $argument_keys[1];
 
                 // check arguments number
-
                 if(count($argument_keys) !== (count($matches) -1)) {
                     continue;
                 }
@@ -139,7 +138,7 @@ class Router
                 }
             }
 
-            $routes->setParameters($params);
+            $routes->setParameters($params, true);
             $routes->dispatch();
             
             return $routes;
