@@ -3,10 +3,10 @@ namespace MoS\LAN\Views;
 
 interface ViewInterface
 {
+	public function __construct(array $params = array());
 	/*
 	* Display the view to the user
-	* @param $params parameters fom the request
 	*/
-	public function view($params = array()): void;
+	public function view(): void;
 }
 ?>

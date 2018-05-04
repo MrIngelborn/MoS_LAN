@@ -1,19 +1,20 @@
 <?php
 namespace MoS\LAN\Controller;
 
-use MoS\LAN\Routing\RequestInterface,
-	MoS\LAN\Routing\ResponseInterface;
-
-class ErrorController
+class ErrorController extends PageController
 {
 	public function error($params)
 	{
 		$code = $params['code'];
-		call_user_func(array($this, '_'.$code));
-	}
-	
-	private function _404()
-	{
-		echo 'Error 404: Not Found';
+		$code = intval($code);
+		switch ($code) {
+			case 404:
+				header("HTTP/1.1 404 Not Found", true, 404);
+			break;
+			default:
+				echo 'Error: '.$code;
+				return;
+		}
+		$this->display('Error', array('code' => 404));
 	}
 }

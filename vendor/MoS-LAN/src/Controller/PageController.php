@@ -1,12 +1,8 @@
 <?php
 namespace MoS\LAN\Controller;
 
-use MoS\LAN\Routing\RequestInterface,
-	MoS\LAN\Routing\ResponseInterface;
-
-class PageController
+class PageController extends AbstractController
 {
-	const VIEW_NAMESPCE = 'MoS\LAN\Views\\';
 	public function __construct()
 	{	
 	}
@@ -14,11 +10,11 @@ class PageController
 	/*
 	* Display page with name and parameters
 	*/
-	private function display($page, $params)
+	protected function display($page, array $params = array())
 	{
-		$class = self::VIEW_NAMESPCE . ucfirst(strtolower($page)) . 'View';
-		$instance = new $class;
-        call_user_func_array(array($instance, 'view'), $params);
+		$class = self::VIEW_NAMESPACE . ucfirst(strtolower($page)) . 'View';
+		$view = new $class($params);
+		$view->view();
 	}
 	
 	/**

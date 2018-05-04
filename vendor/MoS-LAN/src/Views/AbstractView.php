@@ -10,7 +10,7 @@ abstract class AbstractView implements ViewInterface
 	protected $js_sources = array();
 	protected $css_sources = array();
 	
-	public function __construct()
+	public function __construct(array $params = array())
 	{
 		$this->addJS('/assets/javascript/jquery/jquery-3.3.1.min.js');
 		$this->addCSS('/assets/stylesheets/spectre/spectre.min.css');

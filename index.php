@@ -24,11 +24,11 @@ $router = Router::parseConfig($config);
 
 // Match request
 if (!$router->matchCurrentRequest()) {
-	// Could not find route, add header
-	header("HTTP/1.1 404 Not Found", true, 404);
+	// Could not find route
 	// Route to error controller
 	if (!$router->match('/error/404')) {
 		// No route found to error controller. Include backup document
+		header("HTTP/1.1 404 Not Found", true, 404);
 		include __DIR__.'/error/404.php';
 	}
 	die();
