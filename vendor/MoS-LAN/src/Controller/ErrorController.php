@@ -4,21 +4,16 @@ namespace MoS\LAN\Controller;
 use MoS\LAN\Routing\RequestInterface,
 	MoS\LAN\Routing\ResponseInterface;
 
-class ErrorController implements ControllerInterface
+class ErrorController
 {
-	/**
-	* Execute the given request
-	*/
-	public function execute(RequestInterface $request, ResponseInterface $response)
+	public function error($params)
 	{
-		switch ($request->getParam('code')) {
-			case '404':
-				$uri = urldecode($request->getParam('uri'));
-				echo '404 Page not found: '.$uri;
-				break;
-			default:
-				break;
-		}
+		$code = $params['code'];
+		call_user_func(array($this, '_'.$code));
 	}
-
+	
+	private function _404()
+	{
+		echo 'Error 404: Not Found';
+	}
 }

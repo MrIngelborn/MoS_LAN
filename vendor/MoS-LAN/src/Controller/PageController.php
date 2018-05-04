@@ -24,8 +24,14 @@ class PageController
 	/**
 	* Catch all actions not declared
 	*/
-	public function __call($method_name, $args) {
+	public function __call($method_name, $args)
+	{
         $this->display($method_name, $args);
+    }
+    
+    public function test($a)
+    {
+	    print_r($a);
     }
 
 }

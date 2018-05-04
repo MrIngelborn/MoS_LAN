@@ -1,10 +1,13 @@
 base_path: /
 
 routes:
-  index: [/, MoS\LAN\Controller\PageController.index, GET]
-  user_page: [/user, MoS\LAN\Controller\PageController.user, GET]
+  page_index: [/, MoS\LAN\Controller\PageController.index, GET]
+  page_user: [/user, MoS\LAN\Controller\PageController.user, GET]
+  page_user_id: [/user/:id, MoS\LAN\Controller\PageController.user, GET]
   
-  get_user: [/users, MoS\LAN\Controller\UserController.get, GET]
-  create_user: [/users, MoS\LAN\Controller\UserController.create, POST]
-  delete_user: [/users, MoS\LAN\Controller\UserController.delete, DELETE]
-  update_user: [/users, MoS\LAN\Controller\UserController.update, PUT]
+  user_get: [/users/:id, MoS\LAN\Controller\UserController.get, GET]
+  user_create: [/users/:id, MoS\LAN\Controller\UserController.post, POST]
+  user_delete: [/users/:id, MoS\LAN\Controller\UserController.delete, DELETE]
+  user_update: [/users/:id, MoS\LAN\Controller\UserController.put, PUT]
+  
+  error: [/error/:code, MoS\LAN\Controller\ErrorController.error, GET]
