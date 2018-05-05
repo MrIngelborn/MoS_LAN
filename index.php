@@ -1,5 +1,6 @@
 <?php
-use MoS\LAN\Helpers\PDOFactory;
+use MoS\LAN\Helpers\PDOFactory,
+	MoS\LAN\FrontController;
 
 // Enable error reporting for testing
 ini_set('error_reporting', E_ALL);
@@ -9,6 +10,7 @@ require_once __DIR__.'/bootstrap.php';
 
 $db = PDOFactory::createFromYamlConfig(__DIR__.'/config/db.yaml');
 
-echo $twig->render('index.html');
+$controller = new FrontController($twig);
+$controller->handleRequest();
 
 ?>
