@@ -9,4 +9,6 @@ require_once __DIR__.'/bootstrap.php';
 
 $db = PDOFactory::createFromYamlConfig(__DIR__.'/config/db.yaml');
 
+echo $twig->render('index.html');
+
 ?>
