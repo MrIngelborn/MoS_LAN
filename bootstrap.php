@@ -1,7 +1,7 @@
 <?php
 
 // Setup my autoloader
-require_once __DIR__."/vendor/Psr4AutoloaderClass.php";
+require_once __DIR__."/app/Psr4AutoloaderClass.php";
 $autoloader = new Psr4AutoloaderClass;
 $autoloader->register();
 $autoloader->addNamespace('MoS\LAN', __DIR__.'/app/src');
