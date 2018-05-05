@@ -2,7 +2,6 @@
 namespace MoS\LAN\Helpers;
 
 use Symfony\Component\Yaml\Yaml;
-use PDO;
 
 class PDOFactory
 {
@@ -10,7 +9,7 @@ class PDOFactory
 	* Creates a PDO object from coniguration file
 	* @return The PDO object or null if file does not exist
 	*/
-	public static createFromYamlConfig($fileName): ?PDO
+	public static function createFromYamlConfig($fileName)
 	{
 		$pdo = null;
 		if (is_readable($fileName)) {
