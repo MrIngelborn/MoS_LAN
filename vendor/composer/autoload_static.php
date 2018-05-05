@@ -45,6 +45,13 @@ class ComposerStaticInit9b34b7dc9f9d25e4ba4dd8de9638f15d
                 0 => __DIR__ . '/..' . '/twig/twig/lib',
             ),
         ),
+        'B' => 
+        array (
+            'Bramus' => 
+            array (
+                0 => __DIR__ . '/..' . '/bramus/router/src',
+            ),
+        ),
     );
 
     public static function getInitializer(ClassLoader $loader)
