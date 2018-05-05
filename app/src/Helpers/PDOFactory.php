@@ -14,7 +14,7 @@ class PDOFactory
 		$pdo = null;
 		if (is_readable($fileName)) {
 			// Read and parse the file
-			$config = Yaml::parseFile($yamlFile);
+			$config = Yaml::parseFile($fileName);
 			
 			$host = isset($config['host']) ? $config['host'] : 'localhost';
 			$port = isset($config['port']) ? ';port='.$config['port'] : '';
@@ -25,7 +25,7 @@ class PDOFactory
 			
 			$dsn = "mysql:host=$host$port$dbname$charset";
 			
-			$pdo = new PDO($dsn, $user, $pass);
+			$pdo = new \PDO($dsn, $user, $pass);
 		}
 		return $pdo;
 	}
