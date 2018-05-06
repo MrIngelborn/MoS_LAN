@@ -43,14 +43,18 @@ class FrontController
 		});
 		
 		$this->router->mount('/page', function() {
-			$this->model = new Models\PageModel($this->pdo);
-			$this->controller = new Controllers\PageController($this->model);
+			$initPages = function() {
+				$this->model = new Models\PageModel($this->pdo);
+				$this->controller = new Controllers\PageController($this->model);
+			};
 			
-			$this->router->get('/', function() {
+			$this->router->get('/', function() use ($initPages) {
 				// List Pages
+				$initPages();
 				$this->view = new Views\ListView($this->twig, $this->model);
 			});
-			$this->router->get('/(\w+)', function($name) {
+			$this->router->get('/(\w+)', function($name) use ($initPages) {
+				$initPages();
 				if (!$this->controller->get($name)) {
 					$this->notFound();
 					die();
