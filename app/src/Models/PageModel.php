@@ -45,7 +45,7 @@ class PageModel implements Listable
 		$pages = $this->getData();
 		foreach ($pages as $page) {
 			$item = array(
-				'href' => 'pages'.$page['name'],
+				'href' => 'pages/'.$page['name'],
 				'value' => $page['name']
 			);
 			$list[] = $item;
