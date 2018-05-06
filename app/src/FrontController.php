@@ -47,9 +47,8 @@ class FrontController
 			$this->controller = new Controllers\PageController($this->model);
 			
 			$this->router->get('/', function() {
-			echo 'page';
 				// List Pages
-				echo 'Page list, not yet implemented';
+				$this->view = new Views\ListView($this->twig, $this->model);
 			});
 			$this->router->get('/(\w+)', function($name) {
 				if (!$this->controller->get($name)) {

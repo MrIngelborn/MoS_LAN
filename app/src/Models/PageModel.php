@@ -1,7 +1,7 @@
 <?php
 namespace MoS\LAN\Models;
 
-class PageModel
+class PageModel implements Listable
 {
 	private const TABLE = 'pages';
 	private $pdo;
@@ -16,7 +16,6 @@ class PageModel
 	public function setCriteria($critera)
 	{
 		$this->name = $critera;
-		$this->fetchData();
 	}
 	
 	private function fetchData()
@@ -34,11 +33,39 @@ class PageModel
 	
 	public function getData()
 	{
+		if (!$this->data) {
+			$this->fetchData();
+		}
 		return $this->data;
+	}
+	
+	public function getList()
+	{
+		$list = array();
+		$pages = $this->getData();
+		foreach ($pages as $page) {
+			$item = array(
+				'href' => $page['name'].'.html',
+				'value' => $page['name']
+			);
+			$list[] = $item;
+		}
+		return $list;
+	}
+	public function getListTitle()
+	{
+		return 'Pages';
+	}
+	public function getListHeader()
+	{
+		return 'List of Pages';
 	}
 	
 	public function hasData()
 	{
+		if (!$this->data) {
+			$this->fetchData();
+		}
 		return sizeof($this->data) > 0;
 	}
 }
