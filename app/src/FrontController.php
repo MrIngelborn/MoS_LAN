@@ -38,11 +38,11 @@ class FrontController
 		$this->router->set404(function(){$this->notFound();});
 		
 		$this->router->before('GET', '/', function() {
-			header('Location: /page/index');
+			header('Location: /pages/index');
 			die();
 		});
 		
-		$this->router->mount('/page', function() {
+		$this->router->mount('/pages', function() {
 			$initPages = function() {
 				$this->model = new Models\PageModel($this->pdo);
 				$this->controller = new Controllers\PageController($this->model);
