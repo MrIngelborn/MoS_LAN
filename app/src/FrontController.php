@@ -36,11 +36,18 @@ class FrontController
 	private function setupRoutes()
 	{
 		$this->router->set404(function(){$this->notFound();});
+		
+		$this->router->before('GET', '/', function() {
+			header('Location: /page/index');
+			die();
+		});
+		
 		$this->router->mount('/page', function() {
 			$this->model = new Models\PageModel($this->pdo);
 			$this->controller = new Controllers\PageController($this->model);
 			
 			$this->router->get('/', function() {
+			echo 'page';
 				// List Pages
 				echo 'Page list, not yet implemented';
 			});
@@ -56,7 +63,7 @@ class FrontController
 	
 	private function notFound()
 	{
-	    header('HTTP/1.1 404 Not Found');
+	    header('HTTP/1.1 404 Not Found', true);
 	    echo '404 Not Found';
 	}
 }
