@@ -42,6 +42,13 @@ class FrontController
 			die();
 		});
 		
+		$this->router->get('/([a-z0-9/]+/)?(\w+).(\w+)', function($path, $filename, $ending) {
+			// File requests
+			var_dump($path);
+			var_dump($filename);
+			var_dump($ending);
+		});
+		
 		$this->router->mount('/pages', function() {
 			$initPages = function() {
 				$this->model = new Models\PageModel($this->pdo);
