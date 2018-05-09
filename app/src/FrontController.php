@@ -55,10 +55,7 @@ class FrontController
 			});
 			$this->router->get('/(\w+)', function($name) use ($initPages) {
 				$initPages();
-				if (!$this->controller->get($name)) {
-					$this->notFound();
-					die();
-				}
+				$this->controller->get($name);
 				$this->view = new Views\PageView($this->twig, $this->model);
 			});
 		});
