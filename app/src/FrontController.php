@@ -66,6 +66,21 @@ class FrontController
 				$this->view = new Views\PageView($this->twig, $this->model);
 			});
 		});
+		
+		$this->router->mount('/users' function() {
+			$this->router->get('/', function() {
+				// TODO: List users
+			});
+			$this->router->get('/([0-9]+)', function($id) {
+				// TODO: Display user with $id
+			});
+			$this->router->match('PUT|PATCH', '/([0-9]+)', function($id) {
+				// TODO: Update a user
+			});
+			$this->router->post('/', function() {
+				// TODO: Add a user
+			});
+		});
 	}
 	
 	private function notFound()
