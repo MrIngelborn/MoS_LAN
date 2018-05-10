@@ -33,8 +33,6 @@ class UserModel extends AbstractModel implements Listable
 	}
 	public function getListHeader()
 	{
-		return 'List och Users'
+		return 'List och Users';
 	}
-	
-	
 }
