@@ -1,42 +1,28 @@
 <?php
 namespace MoS\LAN\Models;
 
-class PageModel implements Listable
+class PageModel extends AbstractModel implements Listable
 {
 	private const TABLE = 'pages';
-	private $pdo;
-	private $name;
-	private $data;
 	
-	public function __construct(\PDO $pdo)
+	public function fetchById($id)
 	{
-		$this->pdo = $pdo;
+		$query = 'SELECT * FROM '.self::TABLE.' WHERE id = :id LIMIT 1';
+		$params = array(':id' => $id);
+		$this->fetchData($query, $params);
 	}
 	
-	public function setCriteria($critera)
+	public function fetchByName($name)
 	{
-		$this->name = $critera;
+		$query = 'SELECT * FROM '.self::TABLE.' WHERE name = :name LIMIT 1';
+		$params = array(':name' => $name);
+		$this->fetchData($query, $params);
 	}
 	
-	private function fetchData()
+	public function fetchList()
 	{
-		$query = 'SELECT * FROM '.self::TABLE;
-		$params = array();
-		if (isset($this->name)) {
-			$params[':name'] = $this->name;
-			$query .= ' WHERE name = :name';
-		}
-		$stmt = $this->pdo->prepare($query);
-		$stmt->execute($params);
-		$this->data = $stmt->fetchAll();
-	}
-	
-	public function getData()
-	{
-		if (!$this->data) {
-			$this->fetchData();
-		}
-		return $this->data;
+		$query = 'SELECT name FROM '.self::TABLE;
+		$this->fetchData($query, null);
 	}
 	
 	public function getList()
@@ -59,13 +45,5 @@ class PageModel implements Listable
 	public function getListHeader()
 	{
 		return 'List of Pages';
-	}
-	
-	public function hasData()
-	{
-		if (!$this->data) {
-			$this->fetchData();
-		}
-		return sizeof($this->data) > 0;
 	}
 }
