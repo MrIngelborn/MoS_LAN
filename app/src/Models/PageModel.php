@@ -29,9 +29,10 @@ class PageModel extends AbstractModel implements Listable
 	{
 		$list = array();
 		$pages = $this->getData();
+		$path = rtrim($_SERVER['REQUEST_URI'], '/') . '/';
 		foreach ($pages as $page) {
 			$item = array(
-				'href' => 'pages/'.$page['name'],
+				'href' => $path.$page['name'],
 				'value' => $page['name']
 			);
 			$list[] = $item;
