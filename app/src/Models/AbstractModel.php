@@ -3,6 +3,13 @@ namespace MoS\LAN\Models;
 
 abstract class AbstractModel
 {
+	protected $pdo;
+	protected $data;
+	
+	public function __construct(\PDO $pdo)
+	{
+		$this->pdo = $pdo;
+	}
 	abstract public function fetchById($id);
 	
 	protected function fetchData($query, $params)
