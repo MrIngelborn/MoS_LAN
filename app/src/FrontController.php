@@ -37,45 +37,46 @@ class FrontController
 	{
 		$this->router->set404(function(){$this->notFound();});
 		
+		// Default route
 		$this->router->before('GET', '/', function() {
 			header('Location: /pages/index');
 			die();
 		});
 		
-		$this->router->get('/([a-z0-9/]+/)?(\w+).(\w+)', function($path, $filename, $ending) {
-			// File requests
+		// Handle file requests
+		$this->router->get('/([a-z0-9/]+/)?(\w+)\.(\w+)', function($path, $filename, $ending) {
+			// TODO: Handle the requests
 			var_dump($path);
 			var_dump($filename);
 			var_dump($ending);
 		});
 		
+		$this->router->before('GET', '/pages.*', function() {
+			$this->controller = new Controllers\PageController($this->pdo, $this->twig);
+		});
 		$this->router->mount('/pages', function() {
-			$initPages = function() {
-				$this->model = new Models\PageModel($this->pdo);
-				$this->controller = new Controllers\PageController($this->model);
-			};
-			
-			$this->router->get('/', function() use ($initPages) {
+			$this->router->get('/', function() {
 				// List Pages
-				$initPages();
-				$this->view = new Views\ListView($this->twig, $this->model);
+				$this->controller->list();
 			});
-			$this->router->get('/(\w+)', function($name) use ($initPages) {
-				$initPages();
+			$this->router->get('/(\w+)', function($name) {
+				// Get page by name
 				$this->controller->get($name);
-				$this->view = new Views\PageView($this->twig, $this->model);
 			});
 		});
 		
-		$this->router->mount('/users' function() {
+		$this->router->mount('/users', function() {
 			$this->router->get('/', function() {
 				// TODO: List users
 			});
 			$this->router->get('/([0-9]+)', function($id) {
-				// TODO: Display user with $id
+				// TODO: Display a user
 			});
 			$this->router->match('PUT|PATCH', '/([0-9]+)', function($id) {
 				// TODO: Update a user
+			});
+			$this->router->delete('/', function() {
+				// TODO: Delete a user
 			});
 			$this->router->post('/', function() {
 				// TODO: Add a user
