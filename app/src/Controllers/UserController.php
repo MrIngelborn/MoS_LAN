@@ -2,7 +2,8 @@
 namespace MoS\LAN\Controllers;
 
 use Twig\Environment;
-use MoS\LAN\Models\UserModel;
+use MoS\LAN\Models\UserModel,
+    MoS\LAN\Views\ListView;
 
 class UserController
 {
@@ -12,7 +13,7 @@ class UserController
 	public function __construct(\PDO $pdo, Environment $twig)
 	{
 		$this->twig = $twig;
-		$this->model = new UserModel;
+		$this->model = new UserModel($pdo);
 	}
 	
 	public function get($id)
@@ -33,6 +34,6 @@ class UserController
 	}
 	public function list()
 	{
-		$view = new ListView($twig);
+		$view = new ListView($this->twig, $this->model);
 	}
 }
