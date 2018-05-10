@@ -1,25 +1,36 @@
 <?php
 namespace MoS\LAN\Controllers;
 
-use MoS\LAN\Models\PageModel;
+use MoS\LAN\Models\PageModel,
+    MoS\LAN\Views\PageView,
+    MoS\LAN\Views\ListView,
+    Twig\Environment;
 
-class PageController
+class PageController implements ControllerInterface
 {
 	private $model;
+	private $twig;
 	
-    public function __construct(PageModel $model)
+    public function __construct(\PDO $pdo, Environment $twig)
     {
-	    $this->model = $model;
+	    $this->model = new PageModel($pdo);
+	    $this->twig = $twig;
     }
     
     /*
-	* Sets the model to get the item equal to the given criteria
+	* Display a single page
 	* 
-	* @return bool True if at least one result was found
+	* @param $name the name of the page
 	*/
     public function get($name)
     {
-	    $this->model->setCriteria($name);
-	    return $this->model->hasData();
+	    $this->model->fetchByName($name);
+	    (new PageView($this->twig, $this->model))->display();
+    }
+    public function list()
+    {
+	    $this->model->fetchList();
+	    $view = new ListView($this->twig, $this->model);
+	    $view->display();
     }
 }
