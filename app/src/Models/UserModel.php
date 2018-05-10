@@ -13,7 +13,7 @@ class UserModel extends AbstractModel implements Listable
 	}
 	public function fetchList()
 	{
-		$query = 'SELECT id, username FROM '.self::TABLE;
+		$query = 'SELECT user_id, username FROM '.self::TABLE;
 		$this->fetchData($query, null);
 	}
 	public function getList()
@@ -21,7 +21,7 @@ class UserModel extends AbstractModel implements Listable
 		$list = array();
 		foreach ($this->data as $user) {
 			$list[] = array(
-				'href' => 'users/'.$user['id'],
+				'href' => 'users/'.$user['user_id'],
 				'value' => $user['username']
 			);
 		}
@@ -33,6 +33,6 @@ class UserModel extends AbstractModel implements Listable
 	}
 	public function getListHeader()
 	{
-		return 'List och Users';
+		return 'List of users';
 	}
 }
