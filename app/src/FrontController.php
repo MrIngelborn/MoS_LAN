@@ -51,6 +51,7 @@ class FrontController
 			var_dump($ending);
 		});
 		
+		// Pages
 		$this->router->before('GET', '/pages.*', function() {
 			$this->controller = new Controllers\PageController($this->pdo, $this->twig);
 		});
@@ -65,9 +66,14 @@ class FrontController
 			});
 		});
 		
+		// Users
+		$this->router->before('GET|POST|PUT|PATCH|DELETE', '/users.*', function() {
+			$this->controller = new Controllers\UserController($this->pdo, $this->twig);
+		});
 		$this->router->mount('/users', function() {
 			$this->router->get('/', function() {
 				// TODO: List users
+				$this->controller->list();
 			});
 			$this->router->get('/([0-9]+)', function($id) {
 				// TODO: Display a user
