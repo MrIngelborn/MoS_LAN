@@ -1,0 +1,24 @@
+{% extends "page.html" %}
+
+{% block content %}
+	{% if user %}
+		<h1>User Info</h1>
+	    {% if user.id != null %}
+	        <b>ID:</b> {{ user.id }}<br/>
+	    {% endif %}
+	    {% if user.username != null %}
+	        <b>Username:</b> {{ user.username }}<br/>
+	    {% endif %}
+	    {% if user.password != null %}
+	        <b>Password:</b> {{ user.password }}<br/>
+	    {% endif %}
+	    {% if user.admin != null %}
+	        <b>Admin:</b> {{ user.admin }}<br/>
+	    {% endif %}
+	    {% if user.name != null %}
+	        <b>Real name:</b> {{ user.name }}<br/>
+	    {% endif %}
+	{% else %}
+	   <h1>User not found</h1>
+	{% endif %}
+{% endblock %}
