@@ -6,8 +6,8 @@ use MoS\LAN\Models\AbstractModel,
     
 abstract class AbstractView implements ViewInterface
 {
-	private $model;
-	private $twig;
+	protected $model;
+	protected $twig;
 	
 	public function __construct(Environment $twig, AbstractModel $model)
 	{
