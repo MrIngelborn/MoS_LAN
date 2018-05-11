@@ -34,6 +34,8 @@ class UserController
 	}
 	public function list()
 	{
+		$this->model->fetchList();
 		$view = new ListView($this->twig, $this->model);
+		$view->display();
 	}
 }
