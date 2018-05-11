@@ -13,8 +13,6 @@ class FrontController
 	private $router;
 	private $pdo;
 	private $controller;
-	private $model;
-	private $view;
 	
 	public function __construct(Environment $twig, Router $router, \PDO $pdo)
 	{
@@ -26,11 +24,7 @@ class FrontController
 	public function handleRequest()
 	{
 		//$this->twigEnvironment->display('index.html');
-		$this->router->run(function() {
-			if (isset($this->view)) {
-				$this->view->display();
-			}
-		});
+		$this->router->run();
 	}
 	
 	private function setupRoutes()
@@ -67,7 +61,7 @@ class FrontController
 		});
 		
 		// Users
-		$this->router->before('GET|POST|PATCH|DELETE', '/users.*', function() {
+		$this->router->before('GET|POST', '/users.*', function() {
 			$this->controller = new Controllers\UserController($this->pdo, $this->twig);
 		});
 		$this->router->mount('/users', function() {
@@ -87,7 +81,7 @@ class FrontController
 				// TODO: Update a user
 				$this->controller->update($id);
 			});
-			$this->router->delete('/', function() {
+			$this->router->post('/delete/([0-9]+)', function($id) {
 				// TODO: Delete a user
 			});
 			$this->router->post('/', function() {
