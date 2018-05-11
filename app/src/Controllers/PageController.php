@@ -25,12 +25,11 @@ class PageController implements ControllerInterface
     public function get($name)
     {
 	    $this->model->fetchByName($name);
-	    (new PageView($this->twig, $this->model))->display();
+	    new PageView($this->twig, $this->model);;
     }
     public function list()
     {
 	    $this->model->fetchList();
-	    $view = new ListView($this->twig, $this->model);
-	    $view->display();
+	    new ListView($this->twig, $this->model);
     }
 }
