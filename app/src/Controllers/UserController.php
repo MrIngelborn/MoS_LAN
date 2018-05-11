@@ -19,7 +19,9 @@ class UserController
 	
 	public function get($id)
 	{
-		$this->model->fetchById($id);
+		if ($id > 0){
+			$this->model->fetchById($id);
+		}
 		new UserView($this->twig, $this->model);
 	}
 	public function update($id)
