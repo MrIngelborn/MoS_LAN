@@ -83,8 +83,9 @@ class FrontController
 				// View form to add a new user
 				$this->controller->get(0);
 			});
-			$this->router->patch('/([0-9]+)', function($id) {
+			$this->router->post('/([0-9]+)', function($id) {
 				// TODO: Update a user
+				$this->controller->update($id);
 			});
 			$this->router->delete('/', function() {
 				// TODO: Delete a user
