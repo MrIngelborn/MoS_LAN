@@ -12,6 +12,13 @@ class UserView extends AbstractView
 	}
 	public function display()
 	{
-		var_dump($this->model->getData());
+		$data = $this->model->getData();
+		$params = array(
+			'title' => 'User Info'
+		);
+		if (sizeof($data)) {
+			$params['user'] = $data[0];
+		}
+		$this->twig->display('user.html', $params);
 	}
 }
