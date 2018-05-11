@@ -3,7 +3,7 @@ namespace MoS\LAN\Models;
 
 class UserModel extends AbstractModel implements Listable
 {
-	protected const TABLE = 'login';
+	protected const TABLE = 'users';
 	
 	public function fetchById($id)
 	{
