@@ -16,7 +16,7 @@ abstract class AbstractModel
 	{
 		$stmt = $this->pdo->prepare($query);
 		$stmt->execute($params);
-		$this->data = $stmt->fetchAll();
+		$this->data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 	}
 	
 	public function getData()
