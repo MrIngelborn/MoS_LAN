@@ -4,15 +4,11 @@ namespace MoS\LAN\Views;
 use MoS\LAN\Models\Listable,
     Twig\Environment;
 
-class ListView
-{
-	private $twig;
-	private $model;
-	
+class ListView extends AbstractView
+{	
 	public function __construct(Environment $twig, Listable $model)
 	{
-		$this->twig = $twig;
-		$this->model = $model;
+		parent::__construct($twig, $model);
 	}
 	public function display()
 	{

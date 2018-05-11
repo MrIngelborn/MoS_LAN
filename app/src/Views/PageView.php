@@ -1,19 +1,16 @@
 <?php
 namespace MoS\LAN\Views;
 
-use Twig\Environment;
-use MoS\LAN\Models\PageModel;
+use MoS\LAN\Models\PageModel,
+    Twig\Environment;
 
-class PageView
+class PageView extends AbstractView
 {
-	private $twig;
-	private $model;
-	
 	public function __construct(Environment $twig, PageModel $model)
 	{
-		$this->twig = $twig;
-		$this->model = $model;
+		parent::__construct($twig, $model);
 	}
+	
 	public function display()
 	{
 		$data = $this->model->getData();
