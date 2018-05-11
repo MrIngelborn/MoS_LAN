@@ -22,9 +22,10 @@ class UserModel extends AbstractModel implements Listable
     public function getList()
     {
         $list = array();
+		$path = rtrim($_SERVER['REQUEST_URI'], '/') . '/';
         foreach ($this->data as $user) {
             $list[] = array(
-                'href' => 'users/'.$user['id'],
+                'href' => $path.$user['id'],
                 'value' => $user['username']
             );
         }
