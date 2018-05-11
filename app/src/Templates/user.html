@@ -1,24 +1,26 @@
 {% extends "page.html" %}
 
 {% block content %}
-	{% if user %}
-		<h1>User Info</h1>
-	    {% if user.id != null %}
-	        <b>ID:</b> {{ user.id }}<br/>
-	    {% endif %}
-	    {% if user.username != null %}
-	        <b>Username:</b> {{ user.username }}<br/>
-	    {% endif %}
-	    {% if user.password != null %}
-	        <b>Password:</b> {{ user.password }}<br/>
-	    {% endif %}
-	    {% if user.admin != null %}
-	        <b>Admin:</b> {{ user.admin }}<br/>
-	    {% endif %}
-	    {% if user.name != null %}
-	        <b>Real name:</b> {{ user.name }}<br/>
-	    {% endif %}
+	{% if user.id %}
+		{# Update a existing user #}
+		<h1>Update User</h1>
+		<form action="/users/{{ user.id }}" method="PATCH">
 	{% else %}
-	   <h1>User not found</h1>
+	    {# Create a new user #}
+	    <h1>New User</h1>
+		<form action="/users" method="POST">
 	{% endif %}
+	
+	<label for="username">Username</label>
+	<input name="username" type="text" value="{{ user.username }}" /><br/>
+	
+	<label for="admin">Admin</label>
+	<input name="admin" type="checkbox" {% if user.admin %}checked{% endif %} /><br/>
+	
+	<label for="name">Real Name</label>
+	<input name="name" type="text" value="{{ user.name }}" /><br/>
+	
+	<input type="submit" />
+	
+	</form>
 {% endblock %}

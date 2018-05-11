@@ -14,7 +14,7 @@ class UserView extends AbstractView
 	{
 		$data = $this->model->getData();
 		$params = array(
-			'title' => 'User Info'
+			'title' => 'User Form'
 		);
 		if (sizeof($data)) {
 			$params['user'] = $data[0];
