@@ -27,15 +27,20 @@ class UserController
 	public function update($id)
 	{
 		$changed = array();
-		if ($_POST['username'] != $_POST['_username']) {
-			$changed['username'] = $_POST['username'];
+		$text_properties = array('username', 'name');
+		$bool_properties = array('admin');
+		
+		foreach ($text_properties as $property) {
+			if (isset($_POST[$property]) && isset($_POST["_$property"]) && $_POST[$property] != $_POST["_$property"]) {
+				$changed[$property] = $_POST[$property]; 
+			}
 		}
-		if (isset($_POST['admin']) != $_POST['_admin']) {
-			$changed['admin'] = isset($_POST['admin']) ? 1 : 0;
+		foreach ($bool_properties as $property) {
+			if (isset($_POST["_$property"]) && isset($_POST[$property]) != $_POST["_$property"]) {
+				$changed[$property] = isset($_POST[$property]) ? 1 : 0; 
+			}
 		}
-		if ($_POST['name'] != $_POST['_name']) {
-			$changed['name'] = $_POST['name'];
-		}
+		
 		$this->model->update($id, $changed);
 		
 		// Display info of the updated user
