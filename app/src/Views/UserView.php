@@ -18,6 +18,12 @@ class UserView extends AbstractView
 		);
 		if (sizeof($data)) {
 			$params['user'] = $data[0];
+			$params['header'] = 'Update user #'.$data[0]['id'];
+			$params['submit'] = 'Update';
+		}
+		else {
+			$params['header'] = 'Create new user';
+			$params['submit'] = 'Create';
 		}
 		$this->twig->display('user.html', $params);
 	}
