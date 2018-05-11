@@ -72,18 +72,14 @@ class UserModel extends AbstractModel implements Listable
 	    }
 	    
 	    // Update existing properties
-	    $query = "UPDATE $infoTable SET";
-	    $params = array(
-		    ':id' => $id
-	    );
 	    foreach ($changed as $key => $value) {
-		    $query .= " $key = :$key,";
-		    $params[":$key"] = $value;
+		    $query = "UPDATE $infoTable SET $key = :value WHERE id = :id";
+		    $params = array(
+			    ':id' => $id,
+			    ':value' => $value
+		    );
+		    $this->fetchData($query, $params);
 	    }
-	    // remove last comma
-	    $query = substr($query, 0, -1);
-	    $query .= " WHERE id = :id";
-	    $this->fetchData($query, $params);
 	   
     }
 }
