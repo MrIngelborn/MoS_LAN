@@ -12,7 +12,7 @@ class UserModel extends AbstractModel implements Listable
         $infoTable = self::INFO_TABLE;
         $query = "SELECT * "
                 ."FROM $userTable "
-                ."JOIN $infoTable "
+                ."LEFT JOIN $infoTable "
                 ."ON $userTable.id = $infoTable.user_id "
                 ."WHERE id = :id "
                 ."LIMIT 1";
