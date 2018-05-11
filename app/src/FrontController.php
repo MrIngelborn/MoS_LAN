@@ -67,7 +67,7 @@ class FrontController
 		});
 		
 		// Users
-		$this->router->before('GET|POST|PUT|PATCH|DELETE', '/users.*', function() {
+		$this->router->before('GET|POST|PATCH|DELETE', '/users.*', function() {
 			$this->controller = new Controllers\UserController($this->pdo, $this->twig);
 		});
 		$this->router->mount('/users', function() {
@@ -81,9 +81,9 @@ class FrontController
 			});
 			$this->router->get('/add', function() {
 				// View form to add a new user
-				$this->controller->get(-1);
+				$this->controller->get(0);
 			});
-			$this->router->match('PUT|PATCH', '/([0-9]+)', function($id) {
+			$this->router->patch('/([0-9]+)', function($id) {
 				// TODO: Update a user
 			});
 			$this->router->delete('/', function() {
