@@ -72,11 +72,12 @@ class FrontController
 		});
 		$this->router->mount('/users', function() {
 			$this->router->get('/', function() {
-				// TODO: List users
+				// List users
 				$this->controller->list();
 			});
 			$this->router->get('/([0-9]+)', function($id) {
 				// TODO: Display a user
+				$this->controller->get($id);
 			});
 			$this->router->match('PUT|PATCH', '/([0-9]+)', function($id) {
 				// TODO: Update a user
