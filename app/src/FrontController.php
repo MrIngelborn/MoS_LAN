@@ -32,9 +32,9 @@ class FrontController
 		$this->router->set404(function(){$this->notFound();});
 		
 		// Default route
-		$this->router->before('GET', '/', function() {
-			header('Location: /pages/index');
-			die();
+		$this->router->get('/', function() {
+			$controller = new Controllers\PageController($this->pdo, $this->twig);
+			$controller->get('index');
 		});
 		
 		// Handle file requests
