@@ -3,7 +3,8 @@ namespace MoS\LAN\Controllers;
 
 use Twig\Environment;
 use MoS\LAN\Models\UserModel,
-    MoS\LAN\Views\ListView;
+    MoS\LAN\Views\ListView,
+    MoS\LAN\Views\UserView;
 
 class UserController
 {
@@ -18,7 +19,8 @@ class UserController
 	
 	public function get($id)
 	{
-		$view = new UserView($twig);
+		$this->model->fetchById($id);
+		new UserView($this->twig, $this->model);
 	}
 	public function update($id)
 	{
@@ -36,6 +38,5 @@ class UserController
 	{
 		$this->model->fetchList();
 		$view = new ListView($this->twig, $this->model);
-		$view->display();
 	}
 }
