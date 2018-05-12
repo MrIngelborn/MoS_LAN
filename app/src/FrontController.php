@@ -38,11 +38,10 @@ class FrontController
 		});
 		
 		// Handle file requests
-		$this->router->get('/([a-z0-9/]+/)?(\w+)\.(\w+)', function($path, $filename, $ending) {
+		$this->router->get('/([a-z0-9/]+/)?([a-z0-9\.-]+)\.(\w+)', function($path, $filename, $ending) {
 			// TODO: Handle the requests
-			var_dump($path);
-			var_dump($filename);
-			var_dump($ending);
+			$controller = new Controllers\FileController();
+			$controller->getFile($path, $filename.'.'.$ending);
 		});
 		
 		// Pages
@@ -78,15 +77,15 @@ class FrontController
 				$this->controller->get(0);
 			});
 			$this->router->post('/([0-9]+)', function($id) {
-				// TODO: Update a user
+				// Update a user
 				$this->controller->update($id);
 			});
 			$this->router->post('/', function() {
-				// TODO: Add a user
+				// Add a user
 				$this->controller->add();
 			});
 			$this->router->post('/delete/([0-9]+)', function($id) {
-				// TODO: Delete a user
+				// Delete a user
 				$this->controller->delete($id);
 			});
 		});
