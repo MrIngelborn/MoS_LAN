@@ -46,11 +46,53 @@ class UserController
 		// Display info of the updated user
 		$this->get($id);
 	}
-	public function delete($id)
-	{
-		
-	}
 	public function add()
+	{
+		//var_dump($_POST);
+		$username = $_POST['username'];
+		$password = $_POST['password'];
+		$admin = isset($_POST['admin']) ? 1 : 0;
+		
+		$min_len_username = 4;
+		$min_len_password = 8;
+		
+		// Check validity of username and password
+		if (!function (): bool {
+			if (sizeof($username) < $min_len_username) return false;
+			if (sizeof($password) < $min_len_password) return false;
+			return true;
+		}) {
+			// Username and/or password is not valid
+			return;
+		}
+		// Create array for user properties
+		$user = array(
+			'username' => $username,
+			'password' => $password,
+			'admin' => $admin
+		);
+		// Get array of available properties
+		$properties = $this->model->getProperties();
+		
+		foreach ($properties as $index => $property) {
+			if (array_key_exists($property, $user)) {
+				// The property is a core property, has already been specified
+				continue;
+			}
+			if (!array_key_exists($property, $_POST)) {
+				// Property has not been specified in post request
+				continue;
+			}
+			if ($_POST[$property] == null || sizeof(trim($_POST[$property])) == 0) {
+				// No information, value does not have to be set
+				continue;
+			}
+			$user[$property] = trim($_POST[$property]);
+		}
+		
+		$this->model->add($user);
+	}
+	public function delete($id)
 	{
 		
 	}

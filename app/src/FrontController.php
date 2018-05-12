@@ -81,11 +81,12 @@ class FrontController
 				// TODO: Update a user
 				$this->controller->update($id);
 			});
-			$this->router->post('/delete/([0-9]+)', function($id) {
-				// TODO: Delete a user
-			});
 			$this->router->post('/', function() {
 				// TODO: Add a user
+				$this->controller->add();
+			});
+			$this->router->post('/delete/([0-9]+)', function($id) {
+				// TODO: Delete a user
 			});
 		});
 	}

@@ -81,7 +81,62 @@ class UserModel extends AbstractModel implements Listable
 		    );
 		    $this->fetchData($query, $params);
 	    }
-	   
+    }
+    
+    public function add(array $user)
+    {
+	    // Encrypt password using the current algorithm
+	    $user['password'] = $this->encryptPassword($user['password']);
+	    
+	    // Insert login information
+	    $query = 'INSERT INTO '.self::LOGIN_TABLE.' (username, password, admin) VALUES (:username, :password, :admin)';
+	    $params = array(
+		    ':username' => $user['username'],
+		    ':password' => $user['password'],
+		    ':admin' => $user['admin'],
+	    );
+	    $stmt = $this->pdo->prepare($query);
+		if (!$stmt->execute($params)) {
+			// Could not insert user
+			return false;
+		}
+		$id = $this->pdo->lastInsertId();
+		
+		// Unset inserted properties
+		unset($user['username']);
+		unset($user['password']);
+		unset($user['admin']);
+		
+		// Insert remaining properties
+		foreach ($user as $key => $value) {
+			$query = 'INSERT INTO '.self::TABLE_PREFIX.$key." (user_id, $key) VALUES (:id, :value)";
+		    $params = array(
+			    ':id' => $id,
+			    ':value' => $value
+		    );
+		    $stmt = $this->pdo->prepare($query);
+			if (!$stmt->execute($params)) {
+				// Could not insert property
+				return false;
+			}
+		}
+		return true;
+    }
+    
+    private function encryptPassword($password)
+    {
+	    return md5($password);
+    }
+    
+    public function getProperties()
+    {
+	   $query = 'SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = :table';
+	   $data = $this->query($query, array(':table' => self::INFO_TABLE));
+	   $properties = array();
+	   foreach ($data as $row) {
+		   $properties[] = $row['COLUMN_NAME'];
+	   }
+	   return $properties;
     }
 }
 

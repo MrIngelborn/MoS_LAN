@@ -14,9 +14,16 @@ abstract class AbstractModel
 	
 	protected function fetchData($query, $params)
 	{
+		$this->data = $this->query($query, $params);
+	}
+	
+	protected function query($query, $params)
+	{
 		$stmt = $this->pdo->prepare($query);
-		$stmt->execute($params);
-		$this->data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+		if ($stmt->execute($params)) {
+			return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+		}
+		return $stmt->errorinfo();
 	}
 	
 	public function getData()
