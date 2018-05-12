@@ -83,7 +83,7 @@ class UserModel extends AbstractModel implements Listable
 	    }
     }
     
-    public function add(array $user)
+    public function add(array $user): bool
     {
 	    // Encrypt password using the current algorithm
 	    $user['password'] = $this->encryptPassword($user['password']);
@@ -137,6 +137,15 @@ class UserModel extends AbstractModel implements Listable
 		   $properties[] = $row['COLUMN_NAME'];
 	   }
 	   return $properties;
+    }
+    
+    public function delete($id)
+    {
+	    $query = 'DELETE FROM '.self::LOGIN_TABLE.' WHERE id = :id';
+	    $params = array(
+		    ':id' => $id
+	    );
+	    $this->query($query, $params);
     }
 }
 

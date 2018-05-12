@@ -87,6 +87,7 @@ class FrontController
 			});
 			$this->router->post('/delete/([0-9]+)', function($id) {
 				// TODO: Delete a user
+				$this->controller->delete($id);
 			});
 		});
 	}

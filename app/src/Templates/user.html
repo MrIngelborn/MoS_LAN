@@ -22,5 +22,13 @@
 		<input name="name" type="text" value="{{ user.name }}" /><br/>
 		
 		<input type="submit" value="{{ submit }}"/>
+		
 	</form>
+	
+	{% if user %}
+	<form action="/users/delete/{{ user.id }}" method="post">
+		<input type="submit" value="Delete" />
+	</form>
+	{% endif %}
+	
 {% endblock %}

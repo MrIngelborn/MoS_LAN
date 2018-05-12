@@ -90,11 +90,22 @@ class UserController
 			$user[$property] = trim($_POST[$property]);
 		}
 		
-		$this->model->add($user);
+		if (!$this->model->add($user)) {
+			//Something went wrong
+			echo 'ERROR';
+		}
+		else {
+			echo 'SUCCESS';
+		}
+		
+		//Display list of users
+		$this->list();
+		
 	}
 	public function delete($id)
 	{
-		
+		$this->model->delete($id);
+		$this->list();
 	}
 	public function list()
 	{
